@@ -5,6 +5,8 @@ import logo from '../assets/logo-web.png'
 import { UserOutlined, PieChartOutlined, FundProjectionScreenOutlined, AimOutlined } from '@ant-design/icons';
 import { Link, Route, Routes } from "react-router-dom";
 import AntForm from "../components/Forms";
+import Counter from "../components/Counter";
+import AdminPage from "../components/AdminPage";
 
 function MainLayout() {
     return (
@@ -28,13 +30,17 @@ function MainLayout() {
                         <Menu.Item><AimOutlined />
                         <Link to="/assignments">Assignments</Link>
                         </Menu.Item>
+                        <Menu.Item><AimOutlined />
+                        <Link to="/admin">Admin</Link>
+                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Content >
                     <Routes>
                         <Route path="/" element={<p>Dashboard</p>} />
-                        <Route path="/courses" element={<p>Courses</p>} />
+                        <Route path="/courses" element={<Counter/>} />
                         <Route path="/assignments" element={<AntForm />} />
+                        <Route path="/admin" element={<AdminPage/>} />
                     </Routes>
                 </Content>
 

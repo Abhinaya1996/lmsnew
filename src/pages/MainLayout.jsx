@@ -7,6 +7,19 @@ import { Link, Route, Routes } from "react-router-dom";
 import AntForm from "../components/Forms";
 import Counter from "../components/Counter";
 import AdminPage from "../components/AdminPage";
+import TableAnt from "../components/Table";
+import { ErrorBoundary } from "react-error-boundary";
+import AssignmentTable from "../components/AssignmentTable";
+import CourseTable from "../components/CourseTable";
+
+const FallbackComponent = ({error}) => {
+    return (
+        <div>
+            <h1>Something went wrong</h1>
+            <p>{error.message}</p>
+        </div>
+    );
+}
 
 function MainLayout() {
     return (
@@ -37,10 +50,17 @@ function MainLayout() {
                 </Sider>
                 <Content >
                     <Routes>
-                        <Route path="/" element={<p>Dashboard</p>} />
-                        <Route path="/courses" element={<Counter/>} />
+                        <Route path="/" element={<TableAnt/>} />
+                        <Route path="/courses" element={
+                            <ErrorBoundary FallbackComponent={FallbackComponent}>
+                                <Counter/>
+                            </ErrorBoundary>
+                            } />
                         <Route path="/assignments" element={<AntForm />} />
-                        <Route path="/admin" element={<AdminPage/>} />
+                        <Route path="/admin" element={<AdminPage/>}>
+                            <Route path="assignments" element={<AssignmentTable/>}></Route>
+                            <Route path="courses" element={<CourseTable/>}></Route>
+                        </Route>
                     </Routes>
                 </Content>
 

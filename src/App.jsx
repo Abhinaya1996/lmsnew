@@ -10,6 +10,18 @@ import { Button } from 'antd';
 import AntForm from './components/Forms';
 import MainLayout from './pages/MainLayout';
 import { BrowserRouter } from 'react-router-dom';
+import LayoutDemo from './components/LayoutDemo';
+import ErrorBoundary from 'antd/es/alert/ErrorBoundary';
+
+
+const FallbackComponent = ({error}) => {
+  return (
+      <div>
+          <h1>Something went wrong</h1>
+          <p>{error.message}</p>
+      </div>
+  );
+}
 
 function App() {
   let counters = [1,2,3,4,5,6,7,8,9,10,12]; //this value comes from database
@@ -34,7 +46,11 @@ function App() {
     // </div>
 
   <BrowserRouter>
+  {/* <ErrorBoundary FallbackComponent={FallbackComponent}> */}
   <MainLayout/>
+  {/* </ErrorBoundary> */}
+  
+  {/* <LayoutDemo/> */}
   </BrowserRouter>
     
 

@@ -1,4 +1,4 @@
-import { Avatar, Image, Layout, Menu } from "antd";
+import { Avatar, Button, Image, Layout, Menu } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import logo from '../assets/logo-web.png'
@@ -11,6 +11,10 @@ import TableAnt from "../components/Table";
 import { ErrorBoundary } from "react-error-boundary";
 import AssignmentTable from "../components/AssignmentTable";
 import CourseTable from "../components/CourseTable";
+import LoginPage from "./LoginPage";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+
 
 const FallbackComponent = ({error}) => {
     return (
@@ -22,13 +26,21 @@ const FallbackComponent = ({error}) => {
 }
 
 function MainLayout() {
+    const {isLoggedIn, logout} = useContext(AuthContext)
+
     return (
+        isLoggedIn?
         <Layout style={{ height: '100vh' }}>
             <Header style={{ backgroundColor: "white", display: "flex", justifyContent: "space-between" }}>
                 <Image width="180px" height="42"
                     src={logo} preview={false}
                 />
+                <div>
                 <Avatar size={48} icon={<UserOutlined />} style={{ margin: "8px" }} />
+                <Button type="primary" danger onClick={()=>logout()}>logout</Button>
+
+                </div>
+               
             </Header>
             <Layout>
                 <Sider collapsible={true}>
@@ -67,7 +79,7 @@ function MainLayout() {
             </Layout>
             <Footer >Footer</Footer>
 
-        </Layout>
+        </Layout>:<LoginPage/>
     );
 }
 export default MainLayout;

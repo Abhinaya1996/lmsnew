@@ -1,6 +1,6 @@
 //
 import { Button, Form, Input, Select } from "antd";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import AssignmentTable from "./AssignmentTable";
 import { Outlet, useNavigate } from "react-router-dom";
 import AssignmentForm from "./AssignmentForm";
@@ -51,6 +51,7 @@ function AdminPage() {
             <Button type="primary" htmlType="submit">Create Course</Button>
         </Form.Item>
     </Form>
+    const demoJsx = <><h1>helloworld</h1><p>this is paragraph</p></>
     return (
         <div style={{display:"flex",gap:"20px"}}>
         <div style={{

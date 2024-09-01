@@ -5,10 +5,14 @@ import { LoadingOutlined } from '@ant-design/icons';
 import CounterWarning from "./CounterWarning";
 
 function Counter() {
+    const countObj = {
+        count:0
+    }
 
     const [count, setCount] = useState(0)
+    const [countObject,setCountObject] = useState({count:0})    
     const [count1, setCount1] = useState(0)
-    const [isloading, setIsLoading] = useState(false)
+    // const [isloading, setIsLoading] = useState(false)
     const [showWarning, setShowWarning] = useState(true)
 
     const closeWarning = () => {
@@ -21,6 +25,10 @@ function Counter() {
     const increment = () => {
         setIsLoading(true)
         setCount(count + 1)
+        console.log("beforeIncrement",countObject.count)
+        countObject.count = countObject.count + 1
+        console.log("after increment",countObject.count)
+        setCountObject(countObject)
     }
     useEffect(() => {
         setIsLoading(true)
@@ -44,7 +52,7 @@ function Counter() {
     }, []);
     const spinner = <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />;
     // const spinner = <h1>Loading..</h1>
-    const counter = <h1>Counter:{count}</h1>
+    const counter = <h1>Counter:{countObject.count}</h1>
     if (count > 10) {
         throw new Error("Count is greater than 10")
     }

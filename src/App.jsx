@@ -12,19 +12,21 @@ import MainLayout from './pages/MainLayout';
 import { BrowserRouter } from 'react-router-dom';
 import LayoutDemo from './components/LayoutDemo';
 import ErrorBoundary from 'antd/es/alert/ErrorBoundary';
+import LoginPage from './pages/LoginPage';
+import { AuthProvider } from './context/AuthContext';
 
 
-const FallbackComponent = ({error}) => {
+const FallbackComponent = ({ error }) => {
   return (
-      <div>
-          <h1>Something went wrong</h1>
-          <p>{error.message}</p>
-      </div>
+    <div>
+      <h1>Something went wrong</h1>
+      <p>{error.message}</p>
+    </div>
   );
 }
 
 function App() {
-  let counters = [1,2,3,4,5,6,7,8,9,10,12]; //this value comes from database
+  let counters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]; //this value comes from database
   return (
     // <div>
     //   {/* <Button color="red" type="primary"></Button>
@@ -45,14 +47,17 @@ function App() {
     //   <AntForm/>
     // </div>
 
-  <BrowserRouter>
-  {/* <ErrorBoundary FallbackComponent={FallbackComponent}> */}
-  <MainLayout/>
-  {/* </ErrorBoundary> */}
-  
-  {/* <LayoutDemo/> */}
-  </BrowserRouter>
-    
+    <BrowserRouter>
+      {/* <ErrorBoundary FallbackComponent={FallbackComponent}> */}
+      <AuthProvider>
+        <MainLayout />
+      </AuthProvider>
+
+      {/* </ErrorBoundary> */}
+
+      {/* <LayoutDemo/> */}
+    </BrowserRouter>
+
 
     // <button>Click me</button>
   );
